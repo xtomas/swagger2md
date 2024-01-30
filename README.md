@@ -4,12 +4,18 @@ Swagger to azure wiki markdown conversion utility based on OpenApiDocument defin
 
 ### Features
 
-* ddd OpenApiDocument Title
-* ddd OpenApiDocument Description
+* Add OpenApiDocument Title
+* Add OpenApiDocument Description
 * group all OpenApiDocument paths by tags
 * list of all tags, paths, operations, operation parameters, operation responses
 * list of all schemes
 * links between parameter schemas and schemes list
+
+### Build project
+
+```
+dotnet build
+```
 
 ### Usage
 
@@ -23,4 +29,3 @@ CMD
 ```Batchfile
 swagger2md < "path-to-swagger/swagger.json" > api.md
 ```
-
