@@ -5,7 +5,7 @@ using Microsoft.OpenApi.Readers;
 using swagger2md;
 
 using var swaggerFileStream = Console.OpenStandardInput();
-//using var swaggerFileStream = File.OpenRead("/projects/publicweb/src/VzpTheme.WebAssets/swagger.json");
+//using var swaggerFileStream = File.OpenRead("/projects/web/swagger.json");
 var openApiDocument = new OpenApiStreamReader().Read(swaggerFileStream, out var diagnostic);
 
 Markdown.BoldText(openApiDocument.Info.Title);
