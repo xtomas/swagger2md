@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "swagger2md": {
+      "commandName": "Project",
+      "commandLineArgs": "-i /projects/web/src/swagger.json -st true -sp true -o ./API.md"
+    }
+  }
+}
