@@ -12,7 +12,7 @@ public class DocumentGenerator
 
     public void GenerateDocument()
     {
-        var inputFile = configuration["input"];
+        var inputFile = configuration["inputFile"];
 
         if (!TryGetFileStream(out var swaggerFileStream))
         {
@@ -67,7 +67,7 @@ public class DocumentGenerator
 
         foreach (var tagInfo in tags)
         {
-            using var tagTextWriter = generateSubFiles && outputDir is not null
+            var tagTextWriter = generateSubFiles && outputDir is not null
                 ? File.CreateText(Path.Combine(outputDir, $"{tagInfo.Key.Replace(' ', '-')}.md"))
                 : textWriter;
 
@@ -96,7 +96,7 @@ public class DocumentGenerator
 
     private bool TryGetFileStream([NotNullWhen(true)] out Stream? fileStream)
     {
-        var inputFile = configuration["input"];
+        var inputFile = configuration["inputFile"];
 
         if (File.Exists(inputFile))
         {
