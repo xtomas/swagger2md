@@ -58,6 +58,38 @@ public static class OpenApiHelpers
 
             textWriter.WriteLine();
         }
+        if (operation.RequestBody is not null)
+        {
+            MarkdownHelper.Header3(textWriter, "Request body");
+
+            textWriter.WriteLine("| Required | Description | Format | Schema |");
+            textWriter.WriteLine("| -------- | ----------- | ------ | ------ |");
+
+            foreach (var contentInfo in  operation.RequestBody.Content)
+            {
+                var schema = contentInfo.Value.Schema.GetSchemaType();
+                var format = string.IsNullOrEmpty(schema.Title) ? null : string.Join(",", contentInfo.Key);
+
+                if (!string.IsNullOrEmpty(schema.Key))
+                {
+                    operationModels.Add(schema.Key);
+                }
+
+                textWriter.WriteLine($"| {operation.RequestBody.Required} | {operation.RequestBody.Description} | {format} | {schema.Title} |");
+            }
+
+            foreach(var extension in operation.RequestBody.Extensions)
+            {
+                if (extension.Value is OpenApiString openApiString)
+                {
+                    var schemaKey = openApiString.Value;
+                    var schema = schemas.First(s => s.Key.Equals(schemaKey, StringComparison.OrdinalIgnoreCase));
+                    operationModels.Add(schema.Key);
+                }
+
+                //schemas.TryGetValue(extension.Value, out var schema);
+            }
+        }
 
         if (operation.Responses.Count > 0)
         {
