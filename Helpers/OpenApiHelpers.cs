@@ -166,7 +166,7 @@ public static class OpenApiHelpers
         {
             var isParameterRequired = schema.Required.Contains(parameterInfo.Key) ? "Yes" : "No";
             var description = parameterInfo.Value?.Enum?.Count > 0 // it is enum type
-                ? $"_Enum_: {string.Join(",", parameterInfo.Value.Enum.Select(enumValue =>
+                ? $"*Enum*: {string.Join(",", parameterInfo.Value.Enum.Select(enumValue =>
                 {
                     if (enumValue is OpenApiString openApiString)
                         return $"\"{openApiString.Value}\"";
